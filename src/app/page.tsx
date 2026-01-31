@@ -1,65 +1,114 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getAllPosts } from "@/lib/posts";
 
 export default function Home() {
+  const posts = getAllPosts();
+  const latestPosts = posts.slice(0, 3);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="space-y-16">
+      {/* Hero Section */}
+      <section className="space-y-6">
+        <h1 className="text-4xl font-bold">
+          주말마다 만들고,
+          <br />
+          평일엔 발견하고.
+        </h1>
+        <p className="text-[var(--foreground-muted)] text-lg leading-relaxed">
+          40대 PM이 Claude Code와 함께 매주 새로운 프로덕트를 만들고,
+          그 과정에서 발견한 것들을 기록합니다.
+        </p>
+        <div className="flex gap-4">
+          <Link
+            href="/posts"
+            className="inline-block px-6 py-3 bg-[var(--accent-green)] text-black font-medium rounded-lg hover:opacity-90 transition-opacity"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            글 읽기
+          </Link>
+          <Link
+            href="/about"
+            className="inline-block px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition-colors"
+          >
+            소개
+          </Link>
+        </div>
+      </section>
+
+      {/* Latest Posts */}
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold">최신 글</h2>
+        <div className="space-y-6">
+          {latestPosts.map((post, index) => (
+            <PostPreview
+              key={post.slug}
+              title={post.title}
+              description={post.description}
+              date={post.date}
+              slug={post.slug}
+              isNew={index === 0}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
+        {posts.length > 3 && (
+          <Link
+            href="/posts"
+            className="inline-block text-[var(--foreground-muted)] hover:text-white transition-colors"
+          >
+            모든 글 보기 →
+          </Link>
+        )}
+      </section>
+
+      {/* About Section */}
+      <section className="space-y-4 p-6 border border-white/10 rounded-lg">
+        <h2 className="text-xl font-bold">Weekly Product Lab이란?</h2>
+        <p className="text-[var(--foreground-muted)] leading-relaxed">
+          매주 새로운 프로덕트를 만들고, AI와 함께 빌딩하는 과정을 공유합니다.
+          시행착오, 배움, 그리고 작은 성공들을 솔직하게 기록합니다.
+        </p>
+      </section>
     </div>
   );
+}
+
+function PostPreview({
+  title,
+  description,
+  date,
+  slug,
+  isNew = false,
+}: {
+  title: string;
+  description: string;
+  date: string;
+  slug: string;
+  isNew?: boolean;
+}) {
+  return (
+    <Link href={`/posts/${slug}`} className="block group">
+      <article className="space-y-2">
+        <div className="flex items-center gap-3">
+          <h3 className="text-lg font-medium text-white group-hover:text-[var(--accent-green)] transition-colors">
+            {title}
+          </h3>
+          {isNew && (
+            <span className="px-2 py-0.5 text-xs bg-[var(--accent-orange)] text-white rounded">
+              NEW
+            </span>
+          )}
+        </div>
+        <p className="text-[var(--foreground-muted)] text-sm">{description}</p>
+        <p className="text-[var(--foreground-muted)] text-xs">{formatDate(date)}</p>
+      </article>
+    </Link>
+  );
+}
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
