@@ -19,7 +19,7 @@ export default function Home() {
 
       {/* Latest Posts */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold">최신 글</h2>
+        <h2 className="text-2xl font-bold">Articles</h2>
         <div className="space-y-6">
           {latestPosts.map((post, index) => (
             <PostPreview
