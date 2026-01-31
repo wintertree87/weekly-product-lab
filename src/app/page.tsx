@@ -10,28 +10,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="space-y-6">
         <h1 className="text-4xl font-bold">
-          주말마다 만들고,
-          <br />
-          평일엔 발견하고.
+          1 Week, 1 Product
         </h1>
         <p className="text-[var(--foreground-muted)] text-lg leading-relaxed">
-          비개발자 출신 PM이 Claude Code와 함께 매주 새로운 프로덕트를 만들고,
-          그 과정에서 발견한 것들을 기록합니다.
+          매주 새로운 프로덕트를 만들고, 그 과정에서 발견한 것들을 기록합니다.
         </p>
-        <div className="flex gap-4">
-          <Link
-            href="/posts"
-            className="inline-block px-6 py-3 bg-[var(--accent-green)] text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
-          >
-            글 읽기
-          </Link>
-          <Link
-            href="/about"
-            className="inline-block px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition-colors"
-          >
-            소개
-          </Link>
-        </div>
       </section>
 
       {/* Latest Posts */}
