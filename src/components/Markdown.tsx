@@ -1,12 +1,14 @@
 "use client";
 
+import React from "react";
+
 interface MarkdownProps {
   content: string;
 }
 
 export default function Markdown({ content }: MarkdownProps) {
   const lines = content.split("\n");
-  const elements: JSX.Element[] = [];
+  const elements: React.ReactElement[] = [];
   let i = 0;
   let listItems: string[] = [];
   let keyCounter = 0;
