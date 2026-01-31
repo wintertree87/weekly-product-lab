@@ -1,7 +1,7 @@
 ---
 title: "이 웹사이트를 만든 과정"
 description: "Claude Code와 함께 주말 하루 만에 블로그를 만든 이야기"
-date: "2025-02-01"
+date: "2025-01-31"
 tags: ["빌딩로그", "Claude Code", "Next.js"]
 ---
 
