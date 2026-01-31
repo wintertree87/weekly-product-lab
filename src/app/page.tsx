@@ -15,13 +15,13 @@ export default function Home() {
           평일엔 발견하고.
         </h1>
         <p className="text-[var(--foreground-muted)] text-lg leading-relaxed">
-          40대 PM이 Claude Code와 함께 매주 새로운 프로덕트를 만들고,
+          비개발자 출신 PM이 Claude Code와 함께 매주 새로운 프로덕트를 만들고,
           그 과정에서 발견한 것들을 기록합니다.
         </p>
         <div className="flex gap-4">
           <Link
             href="/posts"
-            className="inline-block px-6 py-3 bg-[var(--accent-green)] text-black font-medium rounded-lg hover:opacity-90 transition-opacity"
+            className="inline-block px-6 py-3 bg-[var(--accent-green)] text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
           >
             글 읽기
           </Link>
