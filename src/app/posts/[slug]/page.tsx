@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
 import Markdown from "@/components/Markdown";
+import Comments from "@/components/Comments";
 
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
@@ -46,6 +47,8 @@ export default async function PostPage({
       <div className="prose prose-invert prose-green max-w-none">
         <Markdown content={post.content} />
       </div>
+
+      <Comments postSlug={slug} />
     </article>
   );
 }
